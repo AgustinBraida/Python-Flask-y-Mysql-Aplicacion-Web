@@ -3,14 +3,14 @@ from flask_mysqldb import MySQL
 
 app = Flask(__name__)
 
-#Conección a la base de datos
+#Conección a la base de datos.
 app.config["MYSQL_HOST"] = "localhost"
 app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = "pilar"
 app.config["MYSQL_DB"] = "negocio"
 mysql = MySQL(app)
 
-#Configuraciones
+#Configuraciones.
 app.secret_key = 'mysecretkey'
 
 @app.route('/')
@@ -27,9 +27,9 @@ def add_contact():
         eml = request.form['email']
         tel = request.form['telefono']
         cur = mysql.connection.cursor()
-        #Escribimos la consulta
+        #Escribimos la consulta.
         cur.execute('INSERT INTO clientes (nombre_apellido, email, telefono) VALUES (%s, %s, %s)', (nom_apll, eml, tel))
-        #Ejecutamos la consulta
+        #Ejecutamos la consulta.
         mysql.connection.commit()
         flash('Contacto agregado satisfactoriamente!!')
         return redirect(url_for('index'))
